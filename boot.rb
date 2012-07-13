@@ -17,7 +17,7 @@ $root = File.dirname(__FILE__) # application root path
 $LOAD_PATH.unshift($root)
 
 require 'bundler'
-Bundler.require(:default, $app, :"#{$app}_#{$env}") # requires all gems
+Bundler.require(:default, $app, $env, "#{$app}_#{$env}")
 
 #
 # Gem configuration

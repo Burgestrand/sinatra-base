@@ -1,6 +1,9 @@
 ENV['APP_NAME'] = 'web'
+
 require_relative 'boot'
 require_relative 'helpers'
+
+require 'sinatra/respond_with'
 
 #
 # Configuration
@@ -39,5 +42,5 @@ helpers Helpers do
 end
 
 get '/' do
-  slim :index
+  respond_with :index
 end

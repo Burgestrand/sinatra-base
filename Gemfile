@@ -16,6 +16,10 @@ group :web_development, :rake do
   gem 'foreman'
 end
 
+group :production do
+  gem 'uglifier'
+end
+
 group :development do
   gem 'pry'
 end

@@ -20,6 +20,7 @@ configure do
     assets.append_path File.join(*path)
   end
 
+  assets.append_path Serenade::ASSET_PATH
 
   assets.js_compressor = Uglifier.new
   assets.css_compressor = Sprockets::Sass::Compressor.new

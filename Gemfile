@@ -11,6 +11,7 @@ group :web, :rake do
   gem "sprockets"
   gem "sprockets-helpers"
   gem "sprockets-sass"
+  gem "serenade", require: "serenade/sprockets"
 
   gem "uglifier"
   gem "compass"

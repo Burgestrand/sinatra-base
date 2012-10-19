@@ -19,16 +19,11 @@ configure do
       serve "/assets/#{path}", from: "assets/#{path}"
     end
 
-    css :screen, %w[
-      /assets/stylesheets/vendor/*.css
-      /assets/stylesheets/screen.css
-    ]
-    css_compression :sass
+    css :screen, %w[/assets/stylesheets/vendor/*.css /assets/stylesheets/screen.css]
+    js  :app,    %w[/assets/javascripts/app.js]
 
-    js :app, %w[
-      /assets/javascripts/app.js
-    ]
-    # js_compression :uglify
+    css_compression :sass
+    js_compression  :uglify
   end
 
   Compass.configuration do |config|

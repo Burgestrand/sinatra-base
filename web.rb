@@ -1,44 +1,55 @@
 ENV['APP_NAME'] = 'web'
 
 require_relative 'boot'
-require_relative 'helpers'
 
+require 'sinatra'
 require 'sinatra/respond_with'
+
+Sinatra.register Sinatra::CompassSupport
 
 #
 # Configuration
 #
 configure do
-  # Sinatra specific
   set :app_file, __FILE__
+  set :root, File.expand_path(File.dirname(__FILE__))
 
-  # Compass
+  assets do
+    %w[javascripts stylesheets images].each do |path|
+      serve "/assets/#{path}", from: "assets/#{path}"
+    end
+
+    css :screen, %w[
+      /assets/stylesheets/vendor/*.css
+      /assets/stylesheets/screen.css
+    ]
+    css_compression :sass
+
+    js :app, %w[
+      /assets/javascripts/app.js
+    ]
+    # js_compression :uglify
+  end
+
   Compass.configuration do |config|
-    config.environment  = settings.environment
-    config.output_style = :expanded
-    config.relative_assets = true
-    config.line_comments = false
+    config.environment      = settings.environment
+    config.output_style     = :expanded
+    config.line_comments    = false
+    config.relative_assets  = true
+    config.images_dir       = "assets/images"
+    config.http_images_path = "/assets/images"
   end
-
-  # Sprockets (Asset pipeline!)
-  sprockets = Sprockets::Environment.new(settings.root)
-  %w(assets vendor).product(%w(javascripts stylesheets fonts images)).each do |*path|
-    sprockets.append_path File.join(*path)
-  end
-
-  set :sprockets, sprockets
 end
 
 configure :development do
-  # Sinatra::Reloader (sinatra-contrib)
+  # from: sinatra-contrib
   require 'sinatra/reloader'
-  also_reload 'helpers.rb'
 end
 
 #
 # Application
 #
-helpers Helpers do
+helpers do
 end
 
 get '/' do

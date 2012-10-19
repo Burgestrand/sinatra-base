@@ -2,8 +2,8 @@ doctype html
 html
   head
     meta[charset="UTF-8"]
-    link[href=asset_path('application.css') rel="stylesheet"]
-    script[src=asset_path('application.js')]
+    == css :screen, media: 'screen'
+    == js  :app
   body
     section.main.container
       == yield

@@ -13,7 +13,7 @@ end
 group :web_development, :rake do
   gem 'compass'
   gem 'coffee-script'
-  gem 'foreman'
+  gem 'rack-livereload'
 end
 
 group :production do
@@ -21,5 +21,8 @@ group :production do
 end
 
 group :development do
+  gem 'guard-livereload'
+  gem 'rb-fsevent', require: false
+  gem 'foreman'
   gem 'pry'
 end

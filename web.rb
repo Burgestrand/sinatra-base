@@ -39,6 +39,8 @@ end
 configure :development do
   # from: sinatra-contrib
   require 'sinatra/reloader'
+
+  use Rack::LiveReload, no_swf: true
 end
 
 #
